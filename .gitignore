@@ -1,1 +1,20 @@
+# Miscellaneous macOS files
 .DS_Store
+.Trashes
+*.swp
+
+# User prefs
+xcuserdata/
+
+# Build-related
+build/
+.build/
+
+# Other
+project.xcworkspace/
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+*.xcuserstate
