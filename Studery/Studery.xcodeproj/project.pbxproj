@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		28561A48292C3D7800F8FFF1 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28561A47292C3D7800F8FFF1 /* Location.swift */; };
 		28561A4A292C3DAE00F8FFF1 /* StuderyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28561A49292C3DAE00F8FFF1 /* StuderyCollectionViewCell.swift */; };
+		5722EDC5292EC5C3003CA70C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722EDC4292EC5C3003CA70C /* NetworkManager.swift */; };
 		572DF22B292B1424005805CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572DF22A292B1424005805CF /* AppDelegate.swift */; };
 		572DF22D292B1424005805CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572DF22C292B1424005805CF /* SceneDelegate.swift */; };
 		572DF22F292B1424005805CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572DF22E292B1424005805CF /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		28561A47292C3D7800F8FFF1 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		28561A49292C3DAE00F8FFF1 /* StuderyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StuderyCollectionViewCell.swift; sourceTree = "<group>"; };
+		5722EDC4292EC5C3003CA70C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		572DF227292B1424005805CF /* Studery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		572DF22A292B1424005805CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		572DF22C292B1424005805CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +52,6 @@
 				7A30B691D5C7C2286EA49743 /* Pods-Studery.debug.xcconfig */,
 				C4E572AB6D7D19F53EFE54B4 /* Pods-Studery.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -79,6 +80,7 @@
 				572DF22C292B1424005805CF /* SceneDelegate.swift */,
 				572DF22E292B1424005805CF /* ViewController.swift */,
 				28561A47292C3D7800F8FFF1 /* Location.swift */,
+				5722EDC4292EC5C3003CA70C /* NetworkManager.swift */,
 				28561A49292C3DAE00F8FFF1 /* StuderyCollectionViewCell.swift */,
 				572DF233292B1427005805CF /* Assets.xcassets */,
 				572DF235292B1427005805CF /* LaunchScreen.storyboard */,
@@ -209,6 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5722EDC5292EC5C3003CA70C /* NetworkManager.swift in Sources */,
 				572DF22F292B1424005805CF /* ViewController.swift in Sources */,
 				572DF22B292B1424005805CF /* AppDelegate.swift in Sources */,
 				28561A48292C3D7800F8FFF1 /* Location.swift in Sources */,

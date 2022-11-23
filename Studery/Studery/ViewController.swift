@@ -18,13 +18,13 @@ class ViewController: UIViewController {
     let BRBs = UIButton()
 
 
-    let becker = Location(imageName: "becker")
-    let keeton = Location(imageName: "keeton")
-    let mattins = Location(imageName: "mattin's")
-    let morrison = Location(imageName: "morrison")
-    let northstar = Location(imageName: "northstar")
-    let okenshields = Location(imageName: "okenshields")
-    let trillium = Location(imageName: "trillium")
+    let becker = Location(id: "0", name: "Becker House", imageName: "becker")
+    let keeton = Location(id: "1", name: "Keeton House", imageName: "keeton")
+    let mattins = Location(id: "2", name: "Duffield Hall", imageName: "mattin's")
+    let morrison = Location(id: "3", name: "Toni Morrison Hall", imageName: "morrison")
+    let northstar = Location(id: "4", name: "Appel Commons", imageName: "northstar")
+    let okenshields = Location(id: "5", name: "Williard Straight Hall", imageName: "okenshields")
+    let trillium = Location(id: "6", name: "Trillium", imageName: "trillium")
 
 
     var locations: [Location] = []
