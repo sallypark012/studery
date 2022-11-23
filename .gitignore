@@ -10,6 +10,9 @@ xcuserdata/
 build/
 .build/
 
+# CocoaPods
+Pods
+
 # Other
 project.xcworkspace/
 *.pbxuser
