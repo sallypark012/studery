@@ -7,10 +7,10 @@
 
 import UIKit
 
-class EateryCollectionViewCell: UICollectionViewCell {
+class StuderyCollectionViewCell: UICollectionViewCell {
     
-    let eateryLabel = UILabel()
-    var eateryImageView = UIImageView()
+    let studeryLabel = UILabel()
+    var studeryImageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,38 +20,38 @@ class EateryCollectionViewCell: UICollectionViewCell {
         contentView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 0)
         contentView.layer.borderWidth = 3
         
-        eateryLabel.contentMode = .scaleToFill
-        eateryLabel.translatesAutoresizingMaskIntoConstraints = false
-        eateryLabel.textAlignment = .left
-        eateryLabel.textColor = .black
-        contentView.addSubview(eateryImageView)
-        contentView.addSubview(eateryLabel)
+        studeryLabel.contentMode = .scaleToFill
+        studeryLabel.translatesAutoresizingMaskIntoConstraints = false
+        studeryLabel.textAlignment = .left
+        studeryLabel.textColor = .black
+        contentView.addSubview(studeryImageView)
+        contentView.addSubview(studeryLabel)
         setupConstraints()
 
-        eateryImageView.contentMode = .scaleToFill
-        eateryImageView.translatesAutoresizingMaskIntoConstraints = false
+        studeryImageView.contentMode = .scaleToFill
+        studeryImageView.translatesAutoresizingMaskIntoConstraints = false
         
     }
 
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            eateryImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            eateryImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
-            eateryImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            eateryImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            studeryImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            studeryImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
+            studeryImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            studeryImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            eateryLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant:150),
-            eateryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            eateryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            eateryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            studeryLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant:150),
+            studeryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            studeryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            studeryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
 
     func configure(location: Location) {
-        eateryLabel.text = location.imageName
-        eateryImageView.image = UIImage(named: location.imageName)
+        studeryLabel.text = location.imageName
+        studeryImageView.image = UIImage(named: location.imageName)
     }
 
     required init?(coder: NSCoder) {

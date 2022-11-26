@@ -9,27 +9,23 @@ import UIKit
 
 class ViewController: UIViewController {
     var Title = UILabel()
-    let Breakfast = UIButton()
-    let Lunch = UIButton()
-    let Dinner = UIButton()
     let North = UIButton()
     let Central = UIButton()
     let West = UIButton()
-    let BRBs = UIButton()
+    let Silent = UIButton()
+    let Whisper = UIButton()
+    let Talking = UIButton()
 
 
-    let becker = Location(id: "0", name: "Becker House", imageName: "becker")
-    let keeton = Location(id: "1", name: "Keeton House", imageName: "keeton")
-    let mattins = Location(id: "2", name: "Duffield Hall", imageName: "mattin's")
-    let morrison = Location(id: "3", name: "Toni Morrison Hall", imageName: "morrison")
-    let northstar = Location(id: "4", name: "Appel Commons", imageName: "northstar")
-    let okenshields = Location(id: "5", name: "Williard Straight Hall", imageName: "okenshields")
-    let trillium = Location(id: "6", name: "Trillium", imageName: "trillium")
+    let libecafe = Location(id: "0", name: "Amir Bhatia Libe Cafe", imageName: "libecafe")
+    let cocktail = Location(id: "1", name: "Cocktail Lounge", imageName: "cocktail")
+    let duffield = Location(id: "2", name: "Duffield Hall", imageName: "duffield")
+    let white = Location(id: "3", name: "A.D. White", imageName: "white")
 
 
     var locations: [Location] = []
     var alllocations : [Location] = []
-    var filterSelected: [Bool] = [false, false, false, false, false, false, false]
+    var filterSelected: [Bool] = [false, false, false, false]
     let locationReuseIdentifier: String = "locationReuseIdentifier"
 
     var collectionView: UICollectionView!
@@ -41,53 +37,23 @@ class ViewController: UIViewController {
         title = "Locations"
         view.backgroundColor = .white
 
-        locations = [becker, keeton, mattins, morrison, northstar, okenshields, trillium]
+        locations = [libecafe, cocktail, duffield, white]
         alllocations = locations
         
-        Title.text = "Eatery"
+        Title.text = "Studery"
         Title.textColor = .black
         Title.font = .systemFont(ofSize: 18, weight: .bold)
         Title.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(Title)
-        
-        Breakfast.setTitle("Breakfast", for: .normal)
-        Breakfast.backgroundColor = .lightGray
-        Breakfast.setTitleColor(.white, for: .normal)
-        Breakfast.translatesAutoresizingMaskIntoConstraints = false
-        Breakfast.layer.cornerRadius = 15
-        Breakfast.tag = 0
-        Breakfast.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
-        Breakfast.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        view.addSubview(Breakfast)
-
-        Lunch.setTitle("Lunch", for: .normal)
-        Lunch.backgroundColor = .lightGray
-        Lunch.setTitleColor(.white, for: .normal)
-        Lunch.translatesAutoresizingMaskIntoConstraints = false
-        Lunch.layer.cornerRadius = 15
-        Lunch.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
-        Lunch.tag = 1
-        Lunch.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        view.addSubview(Lunch)
-
-        Dinner.setTitle("Dinner", for: .normal)
-        Dinner.backgroundColor = .lightGray
-        Dinner.setTitleColor(.white, for: .normal)
-        Dinner.translatesAutoresizingMaskIntoConstraints = false
-        Dinner.layer.cornerRadius = 15
-        Dinner.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
-        Dinner.tag = 2
-        Dinner.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        view.addSubview(Dinner)
         
         North.setTitle("North", for: .normal)
         North.backgroundColor = .lightGray
         North.setTitleColor(.white, for: .normal)
         North.translatesAutoresizingMaskIntoConstraints = false
         North.layer.cornerRadius = 15
-        North.tag = 3
+        North.tag = 0
         North.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
-        North.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        North.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         view.addSubview(North)
         
         Central.setTitle("Central", for: .normal)
@@ -110,15 +76,35 @@ class ViewController: UIViewController {
         West.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(West)
         
-        BRBs.setTitle("BRBs", for: .normal)
-        BRBs.backgroundColor = .lightGray
-        BRBs.setTitleColor(.white, for: .normal)
-        BRBs.translatesAutoresizingMaskIntoConstraints = false
-        BRBs.layer.cornerRadius = 15
-        BRBs.tag = 4
-        BRBs.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
-        BRBs.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        view.addSubview(BRBs)
+        Silent.setTitle("Silent", for: .normal)
+        Silent.backgroundColor = .lightGray
+        Silent.setTitleColor(.white, for: .normal)
+        Silent.translatesAutoresizingMaskIntoConstraints = false
+        Silent.layer.cornerRadius = 15
+        Silent.tag = 4
+        Silent.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
+        Silent.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        view.addSubview(Silent)
+        
+        Whisper.setTitle("Whisper", for: .normal)
+        Whisper.backgroundColor = .lightGray
+        Whisper.setTitleColor(.white, for: .normal)
+        Whisper.translatesAutoresizingMaskIntoConstraints = false
+        Whisper.layer.cornerRadius = 15
+        Whisper.tag = 4
+        Whisper.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
+        Whisper.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        view.addSubview(Whisper)
+        
+        Talking.setTitle("Talking", for: .normal)
+        Talking.backgroundColor = .lightGray
+        Talking.setTitleColor(.white, for: .normal)
+        Talking.translatesAutoresizingMaskIntoConstraints = false
+        Talking.layer.cornerRadius = 15
+        Silent.tag = 4
+        Talking.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
+        Talking.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        view.addSubview(Talking)
         
 
         var locationlayout = UICollectionViewFlowLayout()
