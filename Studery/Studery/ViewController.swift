@@ -122,7 +122,7 @@ class ViewController: UIViewController {
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: locationlayout)
         collectionView.backgroundColor = .white
-        collectionView.register(EateryCollectionViewCell.self, forCellWithReuseIdentifier: locationReuseIdentifier)
+        collectionView.register(StuderyCollectionViewCell.self, forCellWithReuseIdentifier: locationReuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -276,24 +276,6 @@ class ViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            Breakfast.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            Breakfast.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            Breakfast.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
-        ])
-        
-        NSLayoutConstraint.activate([
-            Lunch.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            Lunch.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 87),
-            Lunch.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
-        ])
-        
-        NSLayoutConstraint.activate([
-            Dinner.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            Dinner.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 162),
-            Dinner.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
-        ])
-        
-        NSLayoutConstraint.activate([
             North.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             North.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 237),
             North.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
@@ -309,12 +291,6 @@ class ViewController: UIViewController {
             West.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
             West.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 124.5),
             West.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
-        ])
-        
-        NSLayoutConstraint.activate([
-            BRBs.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
-            BRBs.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 199.5),
-            BRBs.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
         ])
         
         
@@ -344,7 +320,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: locationReuseIdentifier, for: indexPath) as?
-            EateryCollectionViewCell {
+            StuderyCollectionViewCell {
             cell.configure(location: locations[indexPath.row])
             return cell
         }
