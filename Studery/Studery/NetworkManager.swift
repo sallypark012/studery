@@ -33,6 +33,27 @@ class NetworkManager {
         }
     }
 
+    
+    static func updateUserLocation(userId: String, completion: @escaping (Location) -> Void) {
+            let endpoint = "\(host)/update_user_location/"
+            let params: Parameters = [
+                "userId": userId
+            ]
+            AF.request(endpoint, method: .post, parameters: params).validate().responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.dateDecodingStrategy = .iso8601
+                    if let userResponse = try? jsonDecoder.decode(Location.self, from: data) {
+                        completion(userResponse)
+                    } else {
+                        print("Failed to decode the response from the request to update user location")
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
 
 //    static func createPost(title: String, body: String, poster: String, completion: @escaping (Post) -> Void) {
 //        let endpoint = "\(host)/posts/"
