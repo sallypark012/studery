@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     let Central = UIButton()
     let West = UIButton()
     let BRBs = UIButton()
-
-
+    
+    
     let becker = Location(id: "0", name: "Becker House", imageName: "becker")
     let keeton = Location(id: "1", name: "Keeton House", imageName: "keeton")
     let mattins = Location(id: "2", name: "Duffield Hall", imageName: "mattin's")
@@ -25,22 +25,25 @@ class ViewController: UIViewController {
     let northstar = Location(id: "4", name: "Appel Commons", imageName: "northstar")
     let okenshields = Location(id: "5", name: "Williard Straight Hall", imageName: "okenshields")
     let trillium = Location(id: "6", name: "Trillium", imageName: "trillium")
-
-
+    
+    
     var locations: [Location] = []
     var alllocations : [Location] = []
     var filterSelected: [Bool] = [false, false, false, false, false, false, false]
     let locationReuseIdentifier: String = "locationReuseIdentifier"
-
+    
     var collectionView: UICollectionView!
-
+    
     let spacing: CGFloat = 10
+    
+    // Button to present the map view in a new frame
+    let mapTriggerButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Locations"
         view.backgroundColor = .white
-
+        
         locations = [becker, keeton, mattins, morrison, northstar, okenshields, trillium]
         alllocations = locations
         
@@ -59,7 +62,7 @@ class ViewController: UIViewController {
         Breakfast.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         Breakfast.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         view.addSubview(Breakfast)
-
+        
         Lunch.setTitle("Lunch", for: .normal)
         Lunch.backgroundColor = .lightGray
         Lunch.setTitleColor(.white, for: .normal)
@@ -69,7 +72,7 @@ class ViewController: UIViewController {
         Lunch.tag = 1
         Lunch.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(Lunch)
-
+        
         Dinner.setTitle("Dinner", for: .normal)
         Dinner.backgroundColor = .lightGray
         Dinner.setTitleColor(.white, for: .normal)
@@ -120,7 +123,7 @@ class ViewController: UIViewController {
         BRBs.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(BRBs)
         
-
+        
         var locationlayout = UICollectionViewFlowLayout()
         locationlayout.minimumLineSpacing = spacing
         locationlayout.minimumInteritemSpacing = spacing
@@ -130,7 +133,7 @@ class ViewController: UIViewController {
         buttonlayout.minimumInteritemSpacing = spacing
         buttonlayout.scrollDirection = .horizontal
         
-
+        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: locationlayout)
         collectionView.backgroundColor = .white
         collectionView.register(EateryCollectionViewCell.self, forCellWithReuseIdentifier: locationReuseIdentifier)
@@ -139,11 +142,22 @@ class ViewController: UIViewController {
         collectionView.delegate = self
         view.addSubview(collectionView)
         
-    
+        // Set up map trigger button for constraints
+        mapTriggerButton.setTitle("Open Map", for: .normal)
+        mapTriggerButton.setTitleColor(.systemBlue, for: .normal)
+        mapTriggerButton.backgroundColor = .cyan
+        mapTriggerButton.layer.cornerRadius = 7
+        mapTriggerButton.addTarget(self, action: #selector(openMapView), for: .touchUpInside)
+        mapTriggerButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(mapTriggerButton)
 
         setupConstraints()
     }
-
+    
+    @objc func openMapView() {
+        present(MapViewController(), animated: true)
+    }
+    
     @objc func filterShapes(sender: UIButton) {
         locations = []
         
@@ -159,49 +173,49 @@ class ViewController: UIViewController {
         
         
         //breakfast - filter 0
-//        if(filterSelected[0] && filterSelected[3] == false && filterSelected[0] && filterSelected[4] == false){
-//            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton" || location.imageName == "morrison"})
-//        }
+        //        if(filterSelected[0] && filterSelected[3] == false && filterSelected[0] && filterSelected[4] == false){
+        //            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton" || location.imageName == "morrison"})
+        //        }
         if(filterSelected[0]){
             locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton" || location.imageName == "morrison"})
         }
         
         //lunch - filter 1
-//        if(filterSelected[1] && filterSelected[3] == false && filterSelected[1] && filterSelected[4] == false){
-//            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "morrison" || location.imageName == "okenshields" || location.imageName == "trillium"})
-//        }
+        //        if(filterSelected[1] && filterSelected[3] == false && filterSelected[1] && filterSelected[4] == false){
+        //            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "morrison" || location.imageName == "okenshields" || location.imageName == "trillium"})
+        //        }
         if(filterSelected[1]){
             locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "morrison" || location.imageName == "okenshields" || location.imageName == "trillium"})
         }
         
         //dinner - filter 2
-//        if(filterSelected[2] && filterSelected[3] == false && filterSelected[2] && filterSelected[4] == false){
-//            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"||location.imageName == "mattin's" || location.imageName == "northstar" || location.imageName == "okenshields"})
-//        }
+        //        if(filterSelected[2] && filterSelected[3] == false && filterSelected[2] && filterSelected[4] == false){
+        //            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"||location.imageName == "mattin's" || location.imageName == "northstar" || location.imageName == "okenshields"})
+        //        }
         if(filterSelected[2]){
             locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"||location.imageName == "mattin's" || location.imageName == "northstar" || location.imageName == "okenshields"})
         }
         
         //north - filter 3
-//        if(filterSelected[3] && filterSelected[0] == false && filterSelected[3] && filterSelected[1] == false && filterSelected[3] && filterSelected[2] == false){
-//            locations = locations + alllocations.filter({location in location.imageName == "morrison" || location.imageName == "northstar"})
-//        }
+        //        if(filterSelected[3] && filterSelected[0] == false && filterSelected[3] && filterSelected[1] == false && filterSelected[3] && filterSelected[2] == false){
+        //            locations = locations + alllocations.filter({location in location.imageName == "morrison" || location.imageName == "northstar"})
+        //        }
         if(filterSelected[3]){
             locations = locations + alllocations.filter({location in location.imageName == "morrison" || location.imageName == "northstar"})
         }
         
         //central - filter 4
-//        if(filterSelected[3] && filterSelected[0] == false && filterSelected[4] && filterSelected[1] == false && filterSelected[4] && filterSelected[2] == false){
-//            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "okenshields" || location.imageName == "trillium"})
-//        }
+        //        if(filterSelected[3] && filterSelected[0] == false && filterSelected[4] && filterSelected[1] == false && filterSelected[4] && filterSelected[2] == false){
+        //            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "okenshields" || location.imageName == "trillium"})
+        //        }
         if(filterSelected[4]){
             locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "okenshields" || location.imageName == "trillium"})
         }
         
         //west - filter 5
-//        if(filterSelected[3] && filterSelected[0] == false && filterSelected[4] && filterSelected[1] == false && filterSelected[4] && filterSelected[2] == false){
-//            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"})
-//        }
+        //        if(filterSelected[3] && filterSelected[0] == false && filterSelected[4] && filterSelected[1] == false && filterSelected[4] && filterSelected[2] == false){
+        //            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"})
+        //        }
         if(filterSelected[5]){
             locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"})
         }
@@ -226,10 +240,10 @@ class ViewController: UIViewController {
             locations = locations + alllocations.filter({location in location.imageName == "morrison" || location.imageName == "northstar"})
         }
         
-//        // breakfast on central
-//        if(filterSelected[0] && filterSelected[4]) {
-//            locations = locations + alllocations.filter({location in NULL})
-//        }
+        //        // breakfast on central
+        //        if(filterSelected[0] && filterSelected[4]) {
+        //            locations = locations + alllocations.filter({location in NULL})
+        //        }
         
         // lunch on central
         if(filterSelected[1] && filterSelected[4]) {
@@ -240,17 +254,17 @@ class ViewController: UIViewController {
         if(filterSelected[2] && filterSelected[4]) {
             locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "okenshields"})
         }
-
+        
         //breakfast on west
         if(filterSelected[0] && filterSelected[5]) {
             locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"})
         }
-
-//        //lunch on west
-//        if(filterSelected[1] && filterSelected[5]) {
-//            locations = locations + alllocations.filter({location in null})
-//        }
-
+        
+        //        //lunch on west
+        //        if(filterSelected[1] && filterSelected[5]) {
+        //            locations = locations + alllocations.filter({location in null})
+        //        }
+        
         //dinner on west
         if(filterSelected[2] && filterSelected[5]) {
             locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"})
@@ -260,7 +274,7 @@ class ViewController: UIViewController {
         if(filterSelected[0] == false && filterSelected[1] == false && filterSelected[2] == false && filterSelected[3] == false && filterSelected[4] == false && filterSelected[5] == false && filterSelected[6] == false) {
             locations = alllocations
         }
-
+        
         
         print(filterSelected)
         //change the contents of shape array
@@ -268,7 +282,7 @@ class ViewController: UIViewController {
         collectionView.reloadData()
         
     }
-
+    
     func setupConstraints() {
         NSLayoutConstraint.activate([
             Title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
@@ -277,19 +291,19 @@ class ViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             Breakfast.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            Breakfast.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:12),
+            Breakfast.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
             Breakfast.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
         ])
         
         NSLayoutConstraint.activate([
             Lunch.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            Lunch.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:87),
+            Lunch.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 87),
             Lunch.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
         ])
         
         NSLayoutConstraint.activate([
             Dinner.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            Dinner.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:162),
+            Dinner.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 162),
             Dinner.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
         ])
         
@@ -298,7 +312,7 @@ class ViewController: UIViewController {
             North.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 237),
             North.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
         ])
-
+        
         NSLayoutConstraint.activate([
             Central.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             Central.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 312),
@@ -316,7 +330,7 @@ class ViewController: UIViewController {
             BRBs.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 199.5),
             BRBs.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
         ])
-
+        
         
         let collectionViewPadding: CGFloat = 12
         NSLayoutConstraint.activate([
@@ -324,6 +338,15 @@ class ViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: collectionViewPadding),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -collectionViewPadding),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -collectionViewPadding)
+        ])
+        
+        // Set up constraints for positioning the map trigger button
+        let margins = view.layoutMarginsGuide
+        NSLayoutConstraint.activate([
+            mapTriggerButton.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
+            mapTriggerButton.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
+            mapTriggerButton.widthAnchor.constraint(equalToConstant: 100),
+            mapTriggerButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
