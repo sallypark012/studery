@@ -276,27 +276,45 @@ class ViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            North.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            North.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 237),
+            North.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55),
+            North.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
             North.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
         ])
         
         NSLayoutConstraint.activate([
-            Central.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            Central.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 312),
+            Central.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55),
+            Central.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 170),
             Central.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
         ])
         
         NSLayoutConstraint.activate([
-            West.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
-            West.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 124.5),
+            West.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55),
+            West.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 280),
             West.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
+        ])
+        
+        NSLayoutConstraint.activate([
+            Silent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            Silent.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
+            Silent.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
+        ])
+        
+        NSLayoutConstraint.activate([
+            Whisper.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            Whisper.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 170),
+            Whisper.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
+        ])
+        
+        NSLayoutConstraint.activate([
+            Talking.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            Talking.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 280),
+            Talking.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.18)
         ])
         
         
         let collectionViewPadding: CGFloat = 12
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: West.bottomAnchor, constant: 15),
+            collectionView.topAnchor.constraint(equalTo: Silent.bottomAnchor, constant: 15),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: collectionViewPadding),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -collectionViewPadding),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -collectionViewPadding)
