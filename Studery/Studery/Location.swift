@@ -16,13 +16,23 @@ import Foundation
 
 struct Location: Codable {
     let id: String
-    var name: String
-    var imageName: String
+    let name: String
+    let imageName: String
+    let attributes: [Filter]
 }
 
 struct LocationResponse: Codable {
     let success: Bool
     let data: [Location]
+}
+
+enum Filter: Int, Codable {
+    case North
+    case Central
+    case West
+    case Silent
+    case Whisper
+    case Talking
 }
 
 // MARK: TODO - Fill this file in with models to properly decode the JSON responses from the server

@@ -17,15 +17,16 @@ class ViewController: UIViewController {
     let Talking = UIButton()
 
 
-    let libecafe = Location(id: "0", name: "Amir Bhatia Libe Cafe", imageName: "libecafe")
-    let cocktail = Location(id: "1", name: "Cocktail Lounge", imageName: "cocktail")
-    let duffield = Location(id: "2", name: "Duffield Hall", imageName: "duffield")
-    let white = Location(id: "3", name: "A.D. White", imageName: "white")
+    let libecafe = Location(id: "0", name: "Amir Bhatia Libe Cafe", imageName: "libecafe", attributes: [Filter.Central, Filter.Talking])
+    let cocktail = Location(id: "1", name: "Cocktail Lounge", imageName: "cocktail", attributes: [Filter.Central, Filter.Whisper])
+    let duffield = Location(id: "2", name: "Duffield Hall", imageName: "duffield", attributes: [Filter.Central, Filter.Talking])
+    let white = Location(id: "3", name: "A.D. White", imageName: "white", attributes: [Filter.West, Filter.Silent])
 
 
     var locations: [Location] = []
     var alllocations : [Location] = []
-    var filterSelected: [Bool] = [false, false, false, false]
+    var filterSelected: [Bool] = [false, false, false, false, false, false]
+    let filters: [Filter] = [Filter.North, Filter.Central, Filter.West, Filter.Silent, Filter.Whisper, Filter.Talking]
     let locationReuseIdentifier: String = "locationReuseIdentifier"
     
     var collectionView: UICollectionView!
@@ -64,7 +65,7 @@ class ViewController: UIViewController {
         Central.setTitleColor(.white, for: .normal)
         Central.translatesAutoresizingMaskIntoConstraints = false
         Central.layer.cornerRadius = 15
-        Central.tag = 4
+        Central.tag = 1
         Central.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         Central.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(Central)
@@ -74,7 +75,7 @@ class ViewController: UIViewController {
         West.setTitleColor(.white, for: .normal)
         West.translatesAutoresizingMaskIntoConstraints = false
         West.layer.cornerRadius = 15
-        West.tag = 4
+        West.tag = 2
         West.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         West.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(West)
@@ -84,7 +85,7 @@ class ViewController: UIViewController {
         Silent.setTitleColor(.white, for: .normal)
         Silent.translatesAutoresizingMaskIntoConstraints = false
         Silent.layer.cornerRadius = 15
-        Silent.tag = 4
+        Silent.tag = 3
         Silent.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         Silent.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(Silent)
@@ -104,18 +105,18 @@ class ViewController: UIViewController {
         Talking.setTitleColor(.white, for: .normal)
         Talking.translatesAutoresizingMaskIntoConstraints = false
         Talking.layer.cornerRadius = 15
-        Silent.tag = 4
+        Silent.tag = 5
         Talking.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         Talking.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(Talking)
         
         
-        var locationlayout = UICollectionViewFlowLayout()
+        let locationlayout = UICollectionViewFlowLayout()
         locationlayout.minimumLineSpacing = spacing
         locationlayout.minimumInteritemSpacing = spacing
         locationlayout.scrollDirection = .vertical
         
-        var buttonlayout = UICollectionViewFlowLayout()
+        let buttonlayout = UICollectionViewFlowLayout()
         buttonlayout.minimumInteritemSpacing = spacing
         buttonlayout.scrollDirection = .horizontal
         
@@ -156,114 +157,22 @@ class ViewController: UIViewController {
         else{
             sender.backgroundColor = .lightGray
         }
+
+//        print(locations)
+//        print(alllocations)
         
-        
-        //breakfast - filter 0
-        //        if(filterSelected[0] && filterSelected[3] == false && filterSelected[0] && filterSelected[4] == false){
-        //            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton" || location.imageName == "morrison"})
-        //        }
-        if(filterSelected[0]){
-            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton" || location.imageName == "morrison"})
+        // Filter logic
+        for i in 0...filterSelected.count - 1 {
+            if (filterSelected[i]) {
+                locations += alllocations.filter({location in location.attributes.contains(filters[i])})
+            }
         }
         
-        //lunch - filter 1
-        //        if(filterSelected[1] && filterSelected[3] == false && filterSelected[1] && filterSelected[4] == false){
-        //            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "morrison" || location.imageName == "okenshields" || location.imageName == "trillium"})
-        //        }
-        if(filterSelected[1]){
-            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "morrison" || location.imageName == "okenshields" || location.imageName == "trillium"})
-        }
         
-        //dinner - filter 2
-        //        if(filterSelected[2] && filterSelected[3] == false && filterSelected[2] && filterSelected[4] == false){
-        //            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"||location.imageName == "mattin's" || location.imageName == "northstar" || location.imageName == "okenshields"})
-        //        }
-        if(filterSelected[2]){
-            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"||location.imageName == "mattin's" || location.imageName == "northstar" || location.imageName == "okenshields"})
-        }
-        
-        //north - filter 3
-        //        if(filterSelected[3] && filterSelected[0] == false && filterSelected[3] && filterSelected[1] == false && filterSelected[3] && filterSelected[2] == false){
-        //            locations = locations + alllocations.filter({location in location.imageName == "morrison" || location.imageName == "northstar"})
-        //        }
-        if(filterSelected[3]){
-            locations = locations + alllocations.filter({location in location.imageName == "morrison" || location.imageName == "northstar"})
-        }
-        
-        //central - filter 4
-        //        if(filterSelected[3] && filterSelected[0] == false && filterSelected[4] && filterSelected[1] == false && filterSelected[4] && filterSelected[2] == false){
-        //            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "okenshields" || location.imageName == "trillium"})
-        //        }
-        if(filterSelected[4]){
-            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "okenshields" || location.imageName == "trillium"})
-        }
-        
-        //west - filter 5
-        //        if(filterSelected[3] && filterSelected[0] == false && filterSelected[4] && filterSelected[1] == false && filterSelected[4] && filterSelected[2] == false){
-        //            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"})
-        //        }
-        if(filterSelected[5]){
-            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"})
-        }
-        
-        //brbs - filter 6
-        if(filterSelected[6]){
-            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "trillium"})
-        }
-        
-        // breakfast on north
-        if(filterSelected[0] && filterSelected[3]) {
-            locations = locations + alllocations.filter({location in location.imageName == "morrison"})
-        }
-        
-        // lunch on north
-        if(filterSelected[1] && filterSelected[3]) {
-            locations = locations + alllocations.filter({location in location.imageName == "morrison" || location.imageName == "northstar"})
-        }
-        
-        // dinner on north
-        if(filterSelected[2] && filterSelected[3]) {
-            locations = locations + alllocations.filter({location in location.imageName == "morrison" || location.imageName == "northstar"})
-        }
-        
-        //        // breakfast on central
-        //        if(filterSelected[0] && filterSelected[4]) {
-        //            locations = locations + alllocations.filter({location in NULL})
-        //        }
-        
-        // lunch on central
-        if(filterSelected[1] && filterSelected[4]) {
-            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "okenshields" || location.imageName == "trillium"})
-        }
-        
-        // dinner on central
-        if(filterSelected[2] && filterSelected[4]) {
-            locations = locations + alllocations.filter({location in location.imageName == "mattin's" || location.imageName == "okenshields"})
-        }
-        
-        //breakfast on west
-        if(filterSelected[0] && filterSelected[5]) {
-            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"})
-        }
-        
-        //        //lunch on west
-        //        if(filterSelected[1] && filterSelected[5]) {
-        //            locations = locations + alllocations.filter({location in null})
-        //        }
-        
-        //dinner on west
-        if(filterSelected[2] && filterSelected[5]) {
-            locations = locations + alllocations.filter({location in location.imageName == "becker" || location.imageName == "keeton"})
-        }
-        
-        //reset
-        if(filterSelected[0] == false && filterSelected[1] == false && filterSelected[2] == false && filterSelected[3] == false && filterSelected[4] == false && filterSelected[5] == false && filterSelected[6] == false) {
+        // Reset filter selections
+        if(!filterSelected[0] && !filterSelected[1] && !filterSelected[2] && !filterSelected[3] && !filterSelected[4] && !filterSelected[5]) {
             locations = alllocations
         }
-        
-        
-        print(filterSelected)
-        //change the contents of shape array
         
         collectionView.reloadData()
         
