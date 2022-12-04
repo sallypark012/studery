@@ -14,13 +14,14 @@ import Foundation
 //    }
 //}
 
-struct Location: Codable {
+struct Location: Codable, Hashable {
     let id: String
     let name: String
     let imageName: String
     let attributes: [Filter]
-    let latitude: Float
-    let longitude: Float
+    let latitude: Double
+    let longitude: Double
+    var description: String = "No Description"
 }
 
 struct LocationResponse: Codable {

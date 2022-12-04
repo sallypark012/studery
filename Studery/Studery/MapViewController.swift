@@ -15,30 +15,35 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     // Button to dismiss the map view controller
     let dismissButton = UIButton()
+    
+    let spanConstant = 0.005
+    
+    let studySpace: Location
 
     // We need some sort of constructor
-    init() {
+    init(studySpace: Location) {
+        self.studySpace = studySpace
         super.init(nibName: nil, bundle: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
         
         // Set up map view with proper delegation - not sure if this is needed
         mapView.delegate = self
         
         // Designate the location of interest
-        let location = CLLocationCoordinate2D(latitude: 42.4534, longitude: -76.4735)
-        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        let location = CLLocationCoordinate2D(latitude: studySpace.latitude, longitude: studySpace.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: spanConstant, longitudeDelta: spanConstant)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
         
         // Add annotation to the map view
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
-        annotation.title = "Cornell"
-        annotation.subtitle = "lmao"
+        annotation.title = studySpace.name
+        annotation.subtitle = "\(studySpace.latitude), \(studySpace.longitude)"
         mapView.addAnnotation(annotation)
         
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -47,8 +52,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Allow the button to dismiss the map view controller
         dismissButton.setTitle("Close Map", for: .normal)
         dismissButton.setTitleColor(.systemBlue, for: .normal)
-        dismissButton.backgroundColor = .cyan
-        dismissButton.layer.cornerRadius = 7
         dismissButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dismissButton)

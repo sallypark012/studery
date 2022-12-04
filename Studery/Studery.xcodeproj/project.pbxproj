@@ -16,6 +16,7 @@
 		572DF234292B1427005805CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 572DF233292B1427005805CF /* Assets.xcassets */; };
 		572DF237292B1427005805CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 572DF235292B1427005805CF /* LaunchScreen.storyboard */; };
 		5748387A2935461B0006FC96 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574838792935461B0006FC96 /* MapViewController.swift */; };
+		57EEC27E293D274E00B4B75B /* DetailedSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEC27D293D274E00B4B75B /* DetailedSpaceViewController.swift */; };
 		C61ACAAEC474F756AB808A6F /* Pods_Studery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95205D794E9CD7B09E32AEDE /* Pods_Studery.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		572DF236292B1427005805CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		572DF238292B1427005805CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		574838792935461B0006FC96 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		57EEC27D293D274E00B4B75B /* DetailedSpaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedSpaceViewController.swift; sourceTree = "<group>"; };
 		7A30B691D5C7C2286EA49743 /* Pods-Studery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studery.debug.xcconfig"; path = "Target Support Files/Pods-Studery/Pods-Studery.debug.xcconfig"; sourceTree = "<group>"; };
 		95205D794E9CD7B09E32AEDE /* Pods_Studery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E572AB6D7D19F53EFE54B4 /* Pods-Studery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studery.release.xcconfig"; path = "Target Support Files/Pods-Studery/Pods-Studery.release.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				28561A47292C3D7800F8FFF1 /* Location.swift */,
 				5722EDC4292EC5C3003CA70C /* NetworkManager.swift */,
 				28561A49292C3DAE00F8FFF1 /* StuderyCollectionViewCell.swift */,
+				57EEC27D293D274E00B4B75B /* DetailedSpaceViewController.swift */,
 				572DF233292B1427005805CF /* Assets.xcassets */,
 				572DF235292B1427005805CF /* LaunchScreen.storyboard */,
 				572DF238292B1427005805CF /* Info.plist */,
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5722EDC5292EC5C3003CA70C /* NetworkManager.swift in Sources */,
+				57EEC27E293D274E00B4B75B /* DetailedSpaceViewController.swift in Sources */,
 				572DF22F292B1424005805CF /* ViewController.swift in Sources */,
 				572DF22B292B1424005805CF /* AppDelegate.swift in Sources */,
 				28561A48292C3D7800F8FFF1 /* Location.swift in Sources */,

@@ -17,14 +17,14 @@ class ViewController: UIViewController {
     let Talking = UIButton()
 
 
-    let libecafe = Location(id: "0", name: "Amir Bhatia Libe Cafe", imageName: "libecafe", attributes: [Filter.Central, Filter.Talking], latitude: 42.4478, longitude: 76.4847)
-    let cocktail = Location(id: "1", name: "Cocktail Lounge", imageName: "cocktail", attributes: [Filter.Central, Filter.Whisper], latitude: 42.4477, longitude: 76.4853)
-    let duffield = Location(id: "2", name: "Duffield Hall", imageName: "duffield", attributes: [Filter.Central, Filter.Talking], latitude: 42.4450, longitude: 76.4826)
-    let white = Location(id: "3", name: "A.D. White", imageName: "white", attributes: [Filter.Central, Filter.Silent], latitude: 42.4477, longitude: 76.4853)
+    let libecafe = Location(id: "0", name: "Amir Bhatia Libe Cafe", imageName: "libecafe", attributes: [Filter.Central, Filter.Talking], latitude: 42.4479, longitude: -76.4847)
+    let cocktail = Location(id: "1", name: "Cocktail Lounge", imageName: "cocktail", attributes: [Filter.Central, Filter.Whisper], latitude: 42.4478, longitude: -76.4852)
+    let duffield = Location(id: "2", name: "Duffield Hall", imageName: "duffield", attributes: [Filter.Central, Filter.Talking], latitude: 42.4446, longitude: -76.4826)
+    let white = Location(id: "3", name: "A.D. White", imageName: "white", attributes: [Filter.Central, Filter.Silent], latitude: 42.4477, longitude: -76.4852)
 
 
     var locations: [Location] = []
-    var alllocations : [Location] = []
+    var allLocations : [Location] = []
     
     let filters: [Filter] = Filter.allCases
     var filterSelected: [Bool] = []
@@ -40,14 +40,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Locations"
+        title = "Studery"
         view.backgroundColor = .white
 
         filterSelected = Array(repeating: false, count: filters.count)
         locations = [libecafe, cocktail, duffield, white]
-        alllocations = locations
+        allLocations = locations
         
-        Title.text = "Studery"
+        Title.text = "Filters"
         Title.textColor = .black
         Title.font = .systemFont(ofSize: 18, weight: .bold)
         Title.translatesAutoresizingMaskIntoConstraints = false
@@ -114,17 +114,17 @@ class ViewController: UIViewController {
         view.addSubview(Talking)
         
         
-        let locationlayout = UICollectionViewFlowLayout()
-        locationlayout.minimumLineSpacing = spacing
-        locationlayout.minimumInteritemSpacing = spacing
-        locationlayout.scrollDirection = .vertical
+        let locationLayout = UICollectionViewFlowLayout()
+        locationLayout.minimumLineSpacing = spacing
+        locationLayout.minimumInteritemSpacing = spacing
+        locationLayout.scrollDirection = .vertical
         
-        let buttonlayout = UICollectionViewFlowLayout()
-        buttonlayout.minimumInteritemSpacing = spacing
-        buttonlayout.scrollDirection = .horizontal
+        let buttonLayout = UICollectionViewFlowLayout()
+        buttonLayout.minimumInteritemSpacing = spacing
+        buttonLayout.scrollDirection = .horizontal
         
         
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: locationlayout)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: locationLayout)
         collectionView.backgroundColor = .white
         collectionView.register(StuderyCollectionViewCell.self, forCellWithReuseIdentifier: locationReuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -133,19 +133,23 @@ class ViewController: UIViewController {
         view.addSubview(collectionView)
         
         // Set up map trigger button for constraints
-        mapTriggerButton.setTitle("Open Map", for: .normal)
-        mapTriggerButton.setTitleColor(.systemBlue, for: .normal)
-        mapTriggerButton.backgroundColor = .cyan
-        mapTriggerButton.layer.cornerRadius = 7
-        mapTriggerButton.addTarget(self, action: #selector(openMapView), for: .touchUpInside)
-        mapTriggerButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(mapTriggerButton)
+//        mapTriggerButton.setTitle("Open Map", for: .normal)
+//        mapTriggerButton.setTitleColor(.systemBlue, for: .normal)
+//        mapTriggerButton.backgroundColor = .cyan
+//        mapTriggerButton.layer.cornerRadius = 7
+//        mapTriggerButton.addTarget(self, action: #selector(openTestMapView), for: .touchUpInside)
+//        mapTriggerButton.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(mapTriggerButton)
 
         setupConstraints()
     }
     
-    @objc func openMapView() {
-        present(MapViewController(), animated: true)
+    @objc func openTestMapView() {
+        present(MapViewController(studySpace: libecafe), animated: true)
+    }
+    
+    @objc func openDetailedSpaceViewController() {
+        present(DetailedSpaceViewController(location: libecafe), animated: true)
     }
     
     @objc func filterShapes(sender: UIButton) {
@@ -162,19 +166,20 @@ class ViewController: UIViewController {
         }
 
 //        print(locations)
-//        print(alllocations)
+//        print(allLocations)
         
         // Filter logic
         for i in 0...filterSelected.count - 1 {
             if (filterSelected[i]) {
-                locations += alllocations.filter({location in location.attributes.contains(filters[i])})
+                locations += allLocations.filter({location in location.attributes.contains(filters[i])})
+                locations = locations.unique()
             }
         }
         
         
         // Reset filter selections
-        if(filterSelected.allSatisfy({!$0})) {
-            locations = alllocations
+        if (filterSelected.allSatisfy({!$0})) {
+            locations = allLocations
         }
         
         collectionView.reloadData()
@@ -233,13 +238,13 @@ class ViewController: UIViewController {
         ])
         
         // Set up constraints for positioning the map trigger button
-        let margins = view.layoutMarginsGuide
-        NSLayoutConstraint.activate([
-            mapTriggerButton.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
-            mapTriggerButton.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
-            mapTriggerButton.widthAnchor.constraint(equalToConstant: 100),
-            mapTriggerButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
+//        let margins = view.layoutMarginsGuide
+//        NSLayoutConstraint.activate([
+//            mapTriggerButton.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
+//            mapTriggerButton.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
+//            mapTriggerButton.widthAnchor.constraint(equalToConstant: 100),
+//            mapTriggerButton.heightAnchor.constraint(equalToConstant: 50)
+//        ])
     }
 }
 
@@ -252,6 +257,7 @@ extension ViewController: UICollectionViewDataSource {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: locationReuseIdentifier, for: indexPath) as?
             StuderyCollectionViewCell {
             cell.configure(location: locations[indexPath.row])
+            cell.viewController = self
             return cell
         }
         else {
@@ -264,8 +270,14 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (collectionView.frame.width - 10)/2.0
+        let size = (collectionView.frame.width - 10) / 2.0
         return CGSize(width:size, height: size)
     }
 }
 
+extension Sequence where Iterator.Element: Hashable {
+    func unique() -> [Iterator.Element] {
+        var seen: Set<Iterator.Element> = []
+        return filter { seen.insert($0).inserted }
+    }
+}
