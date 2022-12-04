@@ -17,16 +17,18 @@ class ViewController: UIViewController {
     let Talking = UIButton()
 
 
-    let libecafe = Location(id: "0", name: "Amir Bhatia Libe Cafe", imageName: "libecafe", attributes: [Filter.Central, Filter.Talking])
-    let cocktail = Location(id: "1", name: "Cocktail Lounge", imageName: "cocktail", attributes: [Filter.Central, Filter.Whisper])
-    let duffield = Location(id: "2", name: "Duffield Hall", imageName: "duffield", attributes: [Filter.Central, Filter.Talking])
-    let white = Location(id: "3", name: "A.D. White", imageName: "white", attributes: [Filter.West, Filter.Silent])
+    let libecafe = Location(id: "0", name: "Amir Bhatia Libe Cafe", imageName: "libecafe", attributes: [Filter.Central, Filter.Talking], latitude: 42.4478, longitude: 76.4847)
+    let cocktail = Location(id: "1", name: "Cocktail Lounge", imageName: "cocktail", attributes: [Filter.Central, Filter.Whisper], latitude: 42.4477, longitude: 76.4853)
+    let duffield = Location(id: "2", name: "Duffield Hall", imageName: "duffield", attributes: [Filter.Central, Filter.Talking], latitude: 42.4450, longitude: 76.4826)
+    let white = Location(id: "3", name: "A.D. White", imageName: "white", attributes: [Filter.Central, Filter.Silent], latitude: 42.4477, longitude: 76.4853)
 
 
     var locations: [Location] = []
     var alllocations : [Location] = []
-    var filterSelected: [Bool] = [false, false, false, false, false, false]
-    let filters: [Filter] = [Filter.North, Filter.Central, Filter.West, Filter.Silent, Filter.Whisper, Filter.Talking]
+    
+    let filters: [Filter] = Filter.allCases
+    var filterSelected: [Bool] = []
+    
     let locationReuseIdentifier: String = "locationReuseIdentifier"
     
     var collectionView: UICollectionView!
@@ -41,6 +43,7 @@ class ViewController: UIViewController {
         title = "Locations"
         view.backgroundColor = .white
 
+        filterSelected = Array(repeating: false, count: filters.count)
         locations = [libecafe, cocktail, duffield, white]
         alllocations = locations
         
@@ -55,7 +58,7 @@ class ViewController: UIViewController {
         North.setTitleColor(.white, for: .normal)
         North.translatesAutoresizingMaskIntoConstraints = false
         North.layer.cornerRadius = 15
-        North.tag = 0
+        North.tag = Filter.North.rawValue
         North.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         North.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         view.addSubview(North)
@@ -65,7 +68,7 @@ class ViewController: UIViewController {
         Central.setTitleColor(.white, for: .normal)
         Central.translatesAutoresizingMaskIntoConstraints = false
         Central.layer.cornerRadius = 15
-        Central.tag = 1
+        Central.tag = Filter.Central.rawValue
         Central.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         Central.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(Central)
@@ -75,7 +78,7 @@ class ViewController: UIViewController {
         West.setTitleColor(.white, for: .normal)
         West.translatesAutoresizingMaskIntoConstraints = false
         West.layer.cornerRadius = 15
-        West.tag = 2
+        West.tag = Filter.West.rawValue
         West.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         West.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(West)
@@ -85,7 +88,7 @@ class ViewController: UIViewController {
         Silent.setTitleColor(.white, for: .normal)
         Silent.translatesAutoresizingMaskIntoConstraints = false
         Silent.layer.cornerRadius = 15
-        Silent.tag = 3
+        Silent.tag = Filter.Silent.rawValue
         Silent.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         Silent.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(Silent)
@@ -95,7 +98,7 @@ class ViewController: UIViewController {
         Whisper.setTitleColor(.white, for: .normal)
         Whisper.translatesAutoresizingMaskIntoConstraints = false
         Whisper.layer.cornerRadius = 15
-        Whisper.tag = 4
+        Whisper.tag = Filter.Whisper.rawValue
         Whisper.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         Whisper.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(Whisper)
@@ -105,7 +108,7 @@ class ViewController: UIViewController {
         Talking.setTitleColor(.white, for: .normal)
         Talking.translatesAutoresizingMaskIntoConstraints = false
         Talking.layer.cornerRadius = 15
-        Silent.tag = 5
+        Talking.tag = Filter.Talking.rawValue
         Talking.addTarget(self, action: #selector(filterShapes), for: .touchUpInside)
         Talking.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(Talking)
@@ -170,7 +173,7 @@ class ViewController: UIViewController {
         
         
         // Reset filter selections
-        if(!filterSelected[0] && !filterSelected[1] && !filterSelected[2] && !filterSelected[3] && !filterSelected[4] && !filterSelected[5]) {
+        if(filterSelected.allSatisfy({!$0})) {
             locations = alllocations
         }
         

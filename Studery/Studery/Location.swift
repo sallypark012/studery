@@ -19,6 +19,8 @@ struct Location: Codable {
     let name: String
     let imageName: String
     let attributes: [Filter]
+    let latitude: Float
+    let longitude: Float
 }
 
 struct LocationResponse: Codable {
@@ -26,7 +28,7 @@ struct LocationResponse: Codable {
     let data: [Location]
 }
 
-enum Filter: Int, Codable {
+enum Filter: Int, Codable, CaseIterable {
     case North
     case Central
     case West
